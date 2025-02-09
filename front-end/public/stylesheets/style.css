@@ -1,0 +1,180 @@
+/* General Styles */
+body {
+  font-family: "Amazon Ember", Arial, sans-serif;
+  background: #f5f5f5; /* Light gray for a professional look */
+  margin: 0;
+  padding: 0;
+  color: #333; /* Use neutral text colors */
+}
+
+/* Navbar */
+.navbar {
+  background-color: #132533; /* Dark navy for contrast */
+  color: white;
+  padding: 1rem;
+}
+
+/* Hero Banner */
+.hero-banner {
+  background: linear-gradient(to bottom, #132533, #1e4159);
+  color: white;
+  padding: 5rem 0;
+  text-align: center;
+}
+.hero-banner h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+.hero-banner p {
+  font-size: 1.2rem;
+}
+
+.breadcrumb {
+  background-color: #f8f9fa;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.breadcrumb-item a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.breadcrumb-item.active {
+  color: #6c757d;
+}
+
+/* Search Bar Styling */
+
+#search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0 15px;
+}
+
+.custom-search-input {
+  max-width: 1000px;
+  width: 60%;
+  margin-right: 10px;
+}
+
+/* Button Styling */
+#searchButton,
+#clearButton {
+  height: 100%;
+  border-left: none;
+}
+
+/* Center the container */
+.d-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+
+.card {
+  height: 100%;
+}
+
+.card-body {
+  padding-left: 0;
+  padding: 20px;
+}
+
+.card-text {
+  font-size: 1.4rem;
+}
+
+.card-img-top {
+  width: 200px;
+  height: 150px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Product Details Page */
+#product_id {
+  color: grey;
+  font-size: 0.8rem;
+}
+
+#product_price {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+#product_image {
+  margin-top: 9rem;
+}
+
+/* Dashboard */
+
+.card-font-size {
+  font-size: 1.5rem;
+}
+
+/* Banner */
+
+.promo-banner-container {
+  display: flex;
+  justify-content: space-around;
+  background-color: #f9f9f9;
+  padding: 20px 0;
+}
+
+.promo-card {
+  text-align: center;
+  padding: 10px;
+}
+
+/* Categories banner */
+
+.categories-banner {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.categories-banner .card {
+  border: none;
+  transition: transform 0.3s ease-in-out;
+}
+
+.categories-banner .card:hover {
+  transform: scale(1.05);
+}
+
+.categories-banner .card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.categories-banner .badge {
+  font-size: 0.9rem;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+/* Latest products */
+
+.latest-products {
+  background-color: #f8f9fa;
+  padding: 2rem 0;
+}
+
+.latest-products .card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+.latest-products .card img {
+  height: 200px;
+  object-fit: cover;
+}

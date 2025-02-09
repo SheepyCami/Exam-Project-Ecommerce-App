@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title || "Admin Dashboard" %></title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="https://kit.fontawesome.com/9edb65c86a.js"></script>
+  </head>
+  <body>
+    <!-- Include Header -->
+    <%- include('../components/layout/header.ejs') %>
+
+    <div class="container mt-4">
+      <!-- Breadcrumb Section -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Admin Dashboard
+          </li>
+        </ol>
+      </nav>
+
+      <!-- Admin Dashboard Title -->
+      <div class="my-4">
+        <h2>Admin Dashboard</h2>
+      </div>
+
+      <p>Logged in as <%= user.username %></p>
+
+      <!-- 3 Cards Section (Centered) -->
+      <div class="row justify-content-center align-items-center mb-4">
+        <!-- Orders Card -->
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm">
+            <div class="card-body text-center">
+              <h5 class="card-title">
+                <i class="fa fa-shopping-cart"></i> Orders
+              </h5>
+              <p class="card-text">Manage and view orders</p>
+              <a href="/admin/orders" class="btn btn-link text-primary"
+                >Go to Orders</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Users Card -->
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm">
+            <div class="card-body text-center">
+              <h5 class="card-title"><i class="fa fa-users"></i> Users</h5>
+              <p class="card-text">Manage users and their details</p>
+              <a href="/admin/users" class="btn btn-link text-primary"
+                >Go to Users</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Management Section (Links) -->
+      <div class="row justify-content-center align-items-center">
+        <!-- Product Management -->
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm">
+            <div class="card-body text-center">
+              <h5 class="card-title">
+                <i class="fa fa-cube"></i> Product Management
+              </h5>
+              <p class="card-text">Manage products and their details</p>
+              <a href="/admin/products" class="btn btn-link text-primary"
+                >Go to Products</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Management -->
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm">
+            <div class="card-body text-center">
+              <h5 class="card-title">
+                <i class="fa fa-tags"></i> Category Management
+              </h5>
+              <p class="card-text">Manage product categories</p>
+              <a href="/admin/categories" class="btn btn-link text-primary"
+                >Go to Categories</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Brand Management -->
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm">
+            <div class="card-body text-center">
+              <h5 class="card-title">
+                <i class="fa fa-tags"></i> Brand Management
+              </h5>
+              <p class="card-text">Manage brands for products</p>
+              <a href="/admin/brands" class="btn btn-link text-primary"
+                >Go to Brands</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Include Footer -->
+    <%- include('../components/layout/footer.ejs') %>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

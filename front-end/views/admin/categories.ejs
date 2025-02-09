@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="https://kit.fontawesome.com/9edb65c86a.js"></script>
+  </head>
+  <body>
+    <!-- Include Header -->
+    <%- include('../components/layout/header.ejs') %>
+
+    <!-- Breadcrumb -->
+    <div class="container mt-4">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="/admin/dashboard">Admin Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Category Management
+          </li>
+        </ol>
+      </nav>
+
+      <!-- Manage Categories Title -->
+      <h1 class="mb-4">Manage Categories</h1>
+      <p>Logged in as <%= user.username %></p>
+
+      <!-- Add Category Button -->
+      <div class="d-flex justify-content-end mb-3">
+        <button
+          id="addCategoryButton"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#categoryModal"
+        >
+          Add Category
+        </button>
+      </div>
+
+      <!-- Categories Table -->
+      <div class="responsive-table rounded">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Options</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (Array.isArray(categories) && categories.length > 0) { %> <%
+            categories.forEach(category => { %>
+            <tr data-category-id="<%= category.id %>">
+              <td><%= category.id %></td>
+              <td><%= category.name %></td>
+              <td>
+                <button class="btn btn-sm btn-primary btn-edit">Edit</button>
+                <button class="btn btn-sm btn-danger btn-delete">Delete</button>
+              </td>
+            </tr>
+            <% }) %> <% } else { %>
+            <tr>
+              <td colspan="4" class="text-center">No categories available</td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Add/Edit Category Modal -->
+    <div
+      class="modal fade"
+      id="categoryModal"
+      tabindex="-1"
+      aria-labelledby="categoryModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="categoryModalLabel">Manage Category</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="categoryForm">
+              <input type="hidden" id="categoryId" />
+              <div class="form-group mb-3">
+                <label for="categoryName">Category Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="categoryName"
+                  required
+                />
+              </div>
+              <div class="form-group text-end">
+                <button type="submit" class="btn btn-primary">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const token = "<%= token %>";
+    </script>
+
+    <!-- Include Footer -->
+    <%- include('../components/layout/footer.ejs') %>
+
+    <script src="/javascripts/categoryManagement.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

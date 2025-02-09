@@ -1,0 +1,10 @@
+ADMIN_USERNAME =
+  ADMIN_PASSWORD =
+  DATABASE_NAME =
+  DIALECT =
+  DIALECTMODEL =
+  PORT =
+    "3000";
+HOST = "localhost";
+JWT_ECRET = your_super_secret_key;
+COOKIE_EXPIRES_TIME = 7;

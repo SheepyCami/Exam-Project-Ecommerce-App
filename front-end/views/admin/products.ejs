@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="https://kit.fontawesome.com/9edb65c86a.js"></script>
+  </head>
+
+  <body>
+    <!-- Include Header -->
+    <%- include('../components/layout/header.ejs') %>
+
+    <div class="container mt-4">
+      <!-- Breadcrumb Section -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="/admin/dashboard">Admin Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Product Management
+          </li>
+        </ol>
+      </nav>
+
+      <!-- Manage Products Title -->
+      <h1 class="mb-4">Manage Products</h1>
+      <p>Logged in as <%= user.username %></p>
+
+      <!-- Add Product Button -->
+      <div class="d-flex justify-content-end mb-3">
+        <button
+          id="addProductButton"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#productModal"
+        >
+          Add Product
+        </button>
+      </div>
+
+      <!-- Product Table -->
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Discount</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Image URL</th>
+            <th>Image</th>
+            <th>Deleted</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (Array.isArray(products) && products.length > 0) { %> <%
+          products.forEach(product => { %>
+          <tr
+            class="<%= product.isdeleted ? 'table-danger' : '' %>"
+            data-product-id="<%= product.id %>"
+          >
+            <td><%= product.id %></td>
+            <td><%= product.name %></td>
+            <td><%= product.description %></td>
+            <td><%= product.quantity %></td>
+            <td>$<%= product.price %></td>
+            <td><%= product.discount || 'N/A' %></td>
+            <td><%= product.brand || 'N/A' %></td>
+            <td><%= product.category || 'N/A' %></td>
+            <td><%= product.imgurl %></td>
+            <td>
+              <img
+                src="<%= product.imgurl %>"
+                alt="<%= product.name %>"
+                style="width: 50px; height: auto"
+              />
+            </td>
+            <td><%= product.isdeleted ? 'Yes' : 'No' %></td>
+            <td>
+              <button class="btn btn-sm btn-primary btn-edit">Edit</button>
+              <% if (!product.isdeleted) { %>
+              <button class="btn btn-sm btn-danger btn-delete">Delete</button>
+              <% } else { %>
+              <button class="btn btn-sm btn-success undelete-product">
+                Undelete
+              </button>
+              <% } %>
+            </td>
+          </tr>
+          <% }) %> <% } else { %>
+          <tr>
+            <td colspan="12" class="text-center">No products available</td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Add/Edit Product Modal -->
+    <div
+      class="modal fade"
+      id="productModal"
+      tabindex="-1"
+      aria-labelledby="productModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="productModalLabel">Manage Product</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="productForm">
+              <input type="hidden" id="productId" />
+
+              <div class="form-group mb-3">
+                <label for="productName">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productName"
+                  required
+                />
+              </div>
+
+              <div class="form-group mb-3">
+                <label for="productDescription">Description</label>
+                <textarea
+                  class="form-control"
+                  id="productDescription"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="form-group mb-3">
+                <label for="productPrice">Price</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="productPrice"
+                  step="0.01"
+                  required
+                />
+              </div>
+
+              <div class="form-group mb-3">
+                <label for="productQuantity">Quantity</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="productQuantity"
+                  required
+                />
+              </div>
+
+              <div class="form-group mb-3">
+                <label for="productDateAdded">Date Added</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="productDateAdded"
+                  required
+                />
+              </div>
+
+              <div class="form-group mb-3">
+                <label for="productImageUrl">Image URL</label>
+                <input
+                  type="url"
+                  class="form-control"
+                  id="productImageUrl"
+                  required
+                />
+              </div>
+
+              <div class="form-group mb-3">
+                <label for="productStatus">Status</label>
+                <select class="form-control" id="productStatus" required>
+                  <option value="available">Available</option>
+                  <option value="out-of-stock">Out of Stock</option>
+                </select>
+              </div>
+
+              <div class="form-group mb-3">
+                <label for="productBrandName">Brand Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productBrandName"
+                  required
+                />
+              </div>
+
+              <div class="form-group mb-3">
+                <label for="productCategoryName">Category Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productCategoryName"
+                  required
+                />
+              </div>
+
+              <div class="form-group text-end">
+                <button type="submit" class="btn btn-primary">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const token = "<%= token %>";
+    </script>
+
+    <!-- Include Footer -->
+    <%- include('../components/layout/footer.ejs') %>
+
+    <script src="/javascripts/productManagement.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
