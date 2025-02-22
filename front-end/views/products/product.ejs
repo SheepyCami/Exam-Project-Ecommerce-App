@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <%- include('../components/layout/header.ejs') %>
+
+    <!-- Categories Banner -->
+    <div class="container my-4">
+      <div class="d-flex flex-wrap align-items-center">
+        <% categories.forEach(category => { %>
+        <a
+          href="/products/category/<%= category.name.toLowerCase() %>"
+          class="me-3 text-decoration-none text-primary"
+        >
+          <%= category.name %>
+        </a>
+        <% }) %>
+      </div>
+    </div>
+
+    <!-- Product Details Section -->
+    <div class="container py-5">
+      <div class="row">
+        <!-- Product Image -->
+        <div class="col-md-6">
+          <img
+            src="<%= product.imgurl || '/images/placeholder.jpg' %>"
+            class="img-fluid rounded"
+            alt="<%= product.name %>"
+          />
+        </div>
+
+        <!-- Product Information -->
+        <div class="col-md-6">
+          <h2 class="mb-3"><%= product.name %></h2>
+          <p class="lead text-success">
+            Price: $<%= product.price ? parseFloat(product.price).toFixed(2) :
+            "0.00" %>
+          </p>
+          <p>Available Quantity: <%= product.quantity %></p>
+          <p class="text-muted"><%= product.description %></p>
+
+          <!-- Star Ratings (Example) -->
+          <div class="ratings mb-3">
+            <strong>Reviews:</strong>
+            <% for (let i = 1; i <= 5; i++) { %>
+            <i
+              class="fa fa-star <%= i <= Math.round(product.rating || 0) ? 'text-warning' : 'text-secondary' %>"
+            ></i>
+            <% } %>
+            <span>(<%= product.numOfReviews || 0 %> reviews)</span>
+          </div>
+
+          <!-- Add to Cart Button -->
+
+          <button
+            class="btn btn-primary"
+            id="add-to-cart-btn"
+            data-product-id="<%= product.id %>"
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("add-to-cart-btn")
+        .addEventListener("click", async (e) => {
+          e.preventDefault();
+          const productId = e.target.getAttribute("data-product-id");
+
+          try {
+            const response = await fetch("/cart/add", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ productId, quantity: 1 }),
+            });
+
+            if (response.ok) {
+              alert("Item added to cart!");
+
+              window.location.reload(); // Refresh page to reflect changes
+            } else {
+              alert("Failed to add item to cart.");
+            }
+          } catch (error) {
+            console.error("Error adding item to cart:", error);
+          }
+        });
+    </script>
+
+    <%- include('../components/layout/footer.ejs') %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/cfe2ac77ab.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

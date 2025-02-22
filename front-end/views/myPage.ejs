@@ -1,0 +1,93 @@
+<!-- This is for the User version Dashboard, for users to view their orders, current membership etc.  -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+
+    <!-- Include Header -->
+    <%- include('components/layout/header.ejs') %>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="container mt-4">
+      <!-- Breadcrumb Section -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">My page</li>
+        </ol>
+      </nav>
+
+      <!-- UMy page title -->
+      <div class="my-4">
+        <h2>My page</h2>
+      </div>
+
+      <!-- User Info -->
+      <div class="my-4">
+        <h5>Logged in as: <%= user.username %></h5>
+      </div>
+
+      <!-- 3 Cards Section (Centered) -->
+      <div class="row justify-content-center align-items-center">
+        <!-- My Orders Card -->
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm border-light">
+            <div class="card-body text-center">
+              <h5 class="card-title"><i class="fa fa-box"></i> My Orders</h5>
+              <p class="card-text">View and manage your orders.</p>
+              <a href="/orders" class="btn btn-link text-primary"
+                >Go to Orders</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- My Profile Card -->
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm border-light">
+            <div class="card-body text-center">
+              <h5 class="card-title"><i class="fa fa-user"></i> My Profile</h5>
+              <p class="card-text">View and edit your profile details.</p>
+              <a href="/users/mypage/profile" class="btn btn-link text-primary"
+                >Go to Profile</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- My Reviews Card -->
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm border-light">
+            <div class="card-body text-center">
+              <h5 class="card-title"><i class="fa fa-star"></i> My Reviews</h5>
+              <p class="card-text">View and manage your reviews.</p>
+              <a href="/mypage/reviews" class="btn btn-link text-primary"
+                >Go to Reviews</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Include Footer -->
+    <%- include('components/layout/footer.ejs') %>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
